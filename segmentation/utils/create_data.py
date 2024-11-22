@@ -6,16 +6,16 @@ import glob
 import os
 
 def create_dataset(data_name = ''):
-    train_images = sorted(glob.glob("/content/drive/MyDrive/sejong/segmentation/data/images/train/*"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
-    train_labels = sorted(glob.glob("/content/drive/MyDrive/sejong/segmentation/data/labels/train/*"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
+    train_images = sorted(glob.glob("./segmentation/data/images/train/*.jpg"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
+    train_labels = sorted(glob.glob("./segmentation/data/labels/train/*.png"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
     train_images = [img for img in train_images if img.find('jpg')!= -1] # super pixels 이미지 제외
 
-    valid_images = sorted(glob.glob("/content/drive/MyDrive/sejong/segmentation/data/images/val/*"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
-    valid_labels = sorted(glob.glob("/content/drive/MyDrive/sejong/segmentation/data/labels/val/*"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
+    valid_images = sorted(glob.glob("./segmentation/data/images/val/*.jpg"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
+    valid_labels = sorted(glob.glob("./segmentation/data/labels/val/*.png"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
     valid_images = [img for img in valid_images if img.find('jpg')!= -1] # super pixels 이미지 제외
     
-    test_images = sorted(glob.glob("/content/drive/MyDrive/sejong/segmentation/data/images/test/*"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
-    test_labels = sorted(glob.glob("/content/drive/MyDrive/sejong/segmentation/data/labels/test/*"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
+    test_images = sorted(glob.glob("./segmentation/data/images/test/*.jpg"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
+    test_labels = sorted(glob.glob("./segmentation/data/labels/test/*.png"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
     test_images = [img for img in test_images if img.find('jpg')!= -1] # super pixels 이미지 제외
     
 
@@ -46,11 +46,7 @@ def create_dataset(data_name = ''):
 
 
 def create_detection_dataset(data_name = ''):
-    # test_detection_images = sorted(glob.glob("/content/drive/MyDrive/sejong/ex/detection/images/*.jpg"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
-    test_detection_images = sorted(glob.glob("/content/drive/MyDrive/sejong/far/data/data_1/detection/images/*.jpg"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
-    # test_detection_images = sorted(glob.glob("/content/drive/MyDrive/sejong/ex_detection/images/*.jpg"), key=lambda x: os.path.splitext(x)[0])
-    # test_detection_images = [img for img in test_detection_images if img.find('jpg')!= -1] # super pixels 이미지 제외
-    # test_detection_images = sorted(test_detection_images)
+    test_detection_images = sorted(glob.glob("./detection/data/images/*.jpg"),key = lambda x: int(x.split('/')[-1].split('.')[0]))
     
     test_transforms = augmentation_test()
     
