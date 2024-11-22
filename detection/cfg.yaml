@@ -45,7 +45,7 @@ dnn: False
 plots: True
 
 # Prediction settings 예측설정
-source: /content/drive/MyDrive/sejong/final/data/new_data/test # test 예측 할 이미지로 경로 설정하기
+source: ./detection/data/new_data/test # test 예측 할 이미지로 경로 설정하기
 show: False 
 save_txt: True
 save_conf: False # 신뢰도 점수랑 같이 저장할지
