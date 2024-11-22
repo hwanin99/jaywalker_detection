@@ -40,7 +40,6 @@ class myDataSet(object):
         # mask = cv2.imread(path_mask)[:, :, 0] / 255  # 마스크의 채널은 1개만 있으면 된다
         # mask = mask.round()
         mask = cv2.imread(path_mask)[:, :, 0]
-        # mask[mask != 1] = 0 # 도로를 제외한 클래스 제거(이진분류)
         mask[mask == 2] = 1  # 횡단보도(class:2)를 class:1로 변경
         mask[mask != 1] = 0  # 1이 아닌 값은 0으로 변경
 
@@ -67,9 +66,7 @@ class Test_Detection(object):
 
     def __init__(self, path_images,transforms):
         "Initialization"
-        # self.all_path_images = sorted(path_images)
         self.all_path_images = sorted(path_images, key=lambda x: int(x.split('/')[-1].split('.')[0]))
-        # self.all_path_images = sorted(path_images ,key=lambda x: os.path.splitext(x)[0])
         self.transforms = transforms
 
     def __len__(self):
