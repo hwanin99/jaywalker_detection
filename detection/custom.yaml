@@ -2,6 +2,6 @@ names:
 - jaywalker
 - pedestrian
 nc: 2
-test: /content/drive/MyDrive/sejong/final/data/new_data/test
-train: /content/drive/MyDrive/sejong/final/data/new_data/train
-val: /content/drive/MyDrive/sejong/final/data/new_data/val
+test: ./detection/data/new_data/test
+train: ./detection/data/new_data/train
+val: ./detection/data/new_data/val
