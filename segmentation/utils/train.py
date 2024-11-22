@@ -70,8 +70,7 @@ def test(model, dataloader_test, criterion, DEVICE, model_name, data_name):
     fps_list_gpu = []
     fps_list_cpu = []
     
-    # checkpoint_path = f'/content/drive/MyDrive/sejong/segmentation/checkpoints/FCBFormer/ckpt_{model_name}_{data_name}.pth'
-    checkpoint_path = f'/content/drive/MyDrive/sejong/segmentation/checkpoints/{model_name}/ckpt_{model_name}_{data_name}.pth'
+    checkpoint_path = f'./segmentation/checkpoints/{model_name}/ckpt_{model_name}_{data_name}.pth'
 
     print(checkpoint_path)
     model.load_state_dict(torch.load(checkpoint_path, map_location=DEVICE)['net'])
@@ -185,7 +184,7 @@ def metric(model, dataloader_test, DEVICE, model_name, criterion, data_name):
         os.mkdir('checkpoints')
     
     df = pd.DataFrame([metrics_to_save])
-    csv_filename = f'/content/drive/MyDrive/sejong/segmentation/checkpoints/{model_name}/results_{model_name}_{data_name}.csv'
+    csv_filename = f'./segmentation/checkpoints/{model_name}/results_{model_name}_{data_name}.csv'
     df.to_csv(csv_filename, index=False)
 
     print('Test results saved in {}'.format(csv_filename))
@@ -241,7 +240,7 @@ def fit(model, dataloader_train, dataloader_val, criterion, optimizer, DEVICE, e
 
             if not os.path.isdir('checkpoints'):
                 os.mkdir('checkpoints')
-            torch.save(state, f'/content/drive/MyDrive/sejong/segmentation/checkpoints/{model_name}/ckpt_{model_name}_{data_name}.pth')
+            torch.save(state, f'./segmentation/checkpoints/{model_name}/ckpt_{model_name}_{data_name}.pth')
 
 
         elif best_epoch_dice + patience < epoch:
@@ -257,7 +256,7 @@ def fit(model, dataloader_train, dataloader_val, criterion, optimizer, DEVICE, e
     }
 
     df = pd.DataFrame([metrics_to_save])
-    csv_filename = f'/content/drive/MyDrive/sejong/segmentation/checkpoints/{model_name}/results_{model_name}_{data_name}.csv'
+    csv_filename = f'./segmentation/checkpoints/{model_name}/results_{model_name}_{data_name}.csv'
     df.to_csv(csv_filename, index=False)
     
 
