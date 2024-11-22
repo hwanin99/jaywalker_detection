@@ -1,0 +1,103 @@
+# cfg: 모델 설정 정의
+task: detect
+mode: train
+
+epochs: 100
+patience: 5 # 일정 에포크 동안 개선이 없을 경우 학습 중단
+batch: 16 # 1200개를 16개씩 나눠서 돌아가기
+imgsz: 640
+save: True # 학습 중 체크포인트, 예측 결과 저장 여부
+save_period: -1 # 몇 에포크마다 체크포인트 저장할지, -1이면 저장 X
+cache: False # 캐시 사용 x, 매번 데이터셋을 읽어오기, True를 쓰면 반복학습시 데이터로딩시간 단축
+device: 0 # 0이면 gpu, 1이면 cpu
+workers: 8 # 값이 빠를수록 데이터 로딩이 빨라짐, 메모리 사용량 증가
+project: detection
+name: yolov8
+exist_ok: True # 덮어쓰기 # 수정
+pretrained: True # 사전학습된 모델 사용할지 말지 # 수정
+optimizer: SGD 
+verbose: True # 학습 중 자세한 출력을 할지 말지
+seed: 0 # 랜덤 시드 설정
+deterministic: True # 사용시 학습결과가 동일하게 나옴, 여러번 실험할거면 true가 좋음
+single_cls: False # true하면 모든 객체를 하나의 클래스로만 취급
+rect: False # 직사각형 학습 지원
+cos_lr: False # 코사인 학습률 스케줄러 사용여부, 데이터셋이 작으면 False로 학습률 조정이 좋다
+close_mosaic: 10 # 모자이크 증강을 마지막 10 epoch동안 비활성화 여부
+resume: False # 마지막 체크포인트에서 학습 재개 여부
+
+# Segmentation
+overlap_mask: True # 학습 중 mask가 겹치는 것 허용 설정, 복잡한 장면에서 객체 경계를 더 학습 잘함
+mask_ratio: 4 # mask 다운샘플 비율, 입력 mask 해상도 4배로 줄임
+
+# Classification
+dropout: 0.0
+
+# Val/Test settings
+val: True 
+split: val
+save_json: False 
+save_hybrid: False
+conf: 0.25 # default에선 None인데 기본값은 0.25, 객체 검출을 위한 신뢰도 임계값 25프로 이상이여야 유효한것으로 간주, # 수정
+iou: 0.7 # 두 개 bb가 겹치는 정도 70퍼 이상일때 하나만 남기고 나머지 없애기
+max_det: 300 # 이미지당 최대 객체 검출개수
+half: False 
+dnn: False
+plots: True
+
+# Prediction settings 예측설정
+source: /content/drive/MyDrive/sejong/final/data/new_data/test # test 예측 할 이미지로 경로 설정하기
+show: False 
+save_txt: True
+save_conf: False # 신뢰도 점수랑 같이 저장할지
+save_crop: False # 결과 잘라서 저장할지
+show_labels: True  # 객체 검출 결과에 class 이름 보여주기 # 수정
+show_conf: False  # 객체 검출 결과에 신뢰도 점수 표시할지 말지
+vid_stride: 1 # 비디오 프레임 속도 조정하는 stride
+line_width: 3  # 바운딩 박스 두께(픽셀) 설정
+visualize: False # model feature 들을 시각화할지
+augment: True # 예측에 증강 적용할지 말지 # 수정
+agnostic_nms: False
+classes: # 특정 클래스로 결과를 필터링 할지, None이면 모든 class 검출, [0,1]이면 0,1만 뽑아오기
+retina_masks: False # 고해상도 세분화 mask, 이걸 쓰면 좀 더 정교하게 객체의 경계와 형태를 표현
+show_boxes: True  # segmentation에서 바운딩 박스를 표시할지 여부
+
+# Export settings
+format: torchscript # 모델 내보낼 때 사용할 형식,torchscript가 defalut
+keras: False
+optimize: False
+int8: False
+dynamic: False
+simplify: False
+opset: # ONNX의 opset버전 지정
+workspace: 4 # TensorRT의 작업공간크기 설정
+nms: True
+
+# Hyperparameters
+lr0: 0.01
+lrf: 0.01 # 최종학습률
+momentum: 0.937 
+weight_decay: 0.0005 # 옵티마이저 가중치 감소 값
+warmup_epochs: 3.0 # 학습 초기화 단계에서 사용될 epoch 수
+warmup_momentum: 0.8 # 초기화 단계 초기 모멘텀 값
+warmup_bias_lr: 0.1 # 초기 bias 학습률
+box: 7.5 # 박스 손실 가중치
+cls: 0.5 # 클래스 손실 가중치
+dfl: 1.5 # DFL 손실 가중치
+label_smoothing: 0.0 
+nbs: 64 # 명목상의 배치크기
+hsv_h: 0.015 # 색조 증강 비율
+hsv_s: 0.7 # 채도 증강 비율
+hsv_v: 0.4 # 밝기 증강 비율
+degrees: 0.0 # 이미지 회전 각도
+translate: 0.1 # 이미지 이동 비율
+scale: 0.5 # 이미지 크기 조정
+shear: 0.0 # 이미지 전단 변형 각도
+perspective: 0.0 # 이미지 원근 변형 비율
+flipud: 0.0 # 수직 뒤집기
+fliplr: 0.5 # 수평 뒤집기
+mosaic: 1.0 # 모자이크 증강
+mixup: 0.0 # 믹스업 증강
+copy_paste: 0.0 # segmentation에서 쓰는 복사-붙여넣기
+
+# Custom config.yaml
+cfg: # 다양한 실험을 위해 기본설정을 유지하면서 특정파라미터만 변경헤서 쓰는 yaml파일, 예를 들어 학습률 배치크기 데이터셋 경로 수정하기
