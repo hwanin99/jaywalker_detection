@@ -7,5 +7,5 @@
 > 2. 기존의 데이터셋에 도로 영역을 분할한 이미지를 추가하여 학습을 진행
 >     * YOLO v8-m 모델을 사용하여 학습을 진행
 ---
-## 예시 예측 이미지 
+## 예측 결과 예시
 ![image](https://github.com/user-attachments/assets/3e57bb11-67e0-45a8-b52f-9744e416430e)
