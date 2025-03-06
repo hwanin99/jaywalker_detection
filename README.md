@@ -1,4 +1,8 @@
+<div align=center>
+  
 # 자율주행 차량의 안전 운행을 위한 CCTV 연계 보행자 돌발상황 감지
+</div>
+
 ## Algorithm
 ![image](https://github.com/user-attachments/assets/a4bdd8e0-4132-4bb7-9365-3d3a1d83441e)  
 > 1. Image Segmentation을 통해 Object Detection 데이터셋의 도로 영역을 분할
