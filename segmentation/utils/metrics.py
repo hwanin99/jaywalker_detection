@@ -173,7 +173,7 @@ def precision_pytorch_test(outputs: torch.Tensor, labels: torch.Tensor):
 
     SMOOTH = 1e-8
     intersection = (outputs & labels).float().sum((1, 2))  # Will be zero if Truth=0 or Prediction=0
-    tpfp = (labels).float().sum((1, 2))                    # Will be zero if both are 0
+    tpfp = (outputs).float().sum((1, 2))                    # Will be zero if both are 0
     precision = (intersection + SMOOTH) / (tpfp + SMOOTH)  # We smooth our devision to avoid 0/0
 
     return precision.mean()
@@ -198,7 +198,7 @@ def recall_pytorch_test(outputs: torch.Tensor, labels: torch.Tensor):
 
     SMOOTH = 1e-8
     intersection = (outputs & labels).float().sum((1, 2))  # Will be zero if Truth=0 or Prediction=0
-    tpfn = (outputs).float().sum((1, 2))                   # Will be zero if both are 0
+    tpfn = (labels).float().sum((1, 2))                   # Will be zero if both are 0
     recall = (intersection + SMOOTH) / (tpfn + SMOOTH)     # We smooth our devision to avoid 0/0
 
     return recall.mean()
