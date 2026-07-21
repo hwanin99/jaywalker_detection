@@ -13,7 +13,7 @@ def create_model(model_name):
         
     elif model_name == "deeplab_v3_p":
         from models.DeepLabv3_plus import DeepLabv3_plus
-        model = DeepLabv3_plus(n_classes=1,os=8, pretrained=True)
+        model = DeepLabv3_plus(n_classes=1,os=16, pretrained=True)
         return model
 
     elif model_name == "fft_deeplab_v3_p":
